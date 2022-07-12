@@ -11,6 +11,7 @@ contract ArtToken is ERC721Enumerable{
 
   Counters.Counter private _tokenIds;
   address public marketplace;
+  address public owner;
 
   struct Item {
     uint256 id;
@@ -20,7 +21,17 @@ contract ArtToken is ERC721Enumerable{
 
   mapping(uint256 => Item) public Items; //id => Item
 
-  constructor () ERC721("ArtToken", "ARTK") {}
+  modifier restricted() {
+    require(
+      msg.sender == owner,
+      "This function is restricted to the contract's owner"
+    );
+    _;
+  }
+
+  constructor () ERC721("ArtToken", "ARTK") {
+    owner = msg.sender;
+  }
 
   function mint(string memory uri) public returns (uint256){
     _tokenIds.increment();
@@ -42,7 +53,7 @@ contract ArtToken is ERC721Enumerable{
     return Items[tokenId].uri;
   }
 
-  function setMarketplace(address market) public {
+  function setMarketplace(address market) public restricted {
     //require(msg.sender ==);
     marketplace = market;
   }

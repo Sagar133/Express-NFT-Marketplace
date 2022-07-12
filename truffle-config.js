@@ -7,6 +7,13 @@ module.exports = {
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
     },
+    scallop_testnet: {
+      url: "http://scallop.rpc.devicoin.org/",
+      provider: function() {
+        return new HDWalletProvider(process.env.METAMASK_WALLET_SECRET, "http://scallop.rpc.devicoin.org/");
+      },
+      network_id: 9001
+    }
   },
 
   compilers: {

@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "./ArtToken.sol";
 
 contract ArtMarketplace {
+  uint256 itemCounter;
   ArtToken private token;
 
   struct ItemForSale {
@@ -14,6 +15,7 @@ contract ArtMarketplace {
     bool isSold;
   }
 
+  // Will change array to mapping
   ItemForSale[] public itemsForSale;
   mapping(uint256 => bool) public activeItems; // tokenId => ativo?
 
