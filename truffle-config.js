@@ -1,3 +1,8 @@
+require('dotenv').config();
+
+const HDWalletProvider = require("@truffle/hdwallet-provider")
+console.log(process.env.METAMASK_WALLET_SECRET);
+
 module.exports = {
   contracts_build_directory: './client/src/contracts',
 
